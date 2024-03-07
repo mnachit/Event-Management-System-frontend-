@@ -25,10 +25,10 @@ export class LoginComponent {
   }
   
 
-  showSuccess(): void {
+  showSuccess(text: string): void {
     Swal.fire({
       title: 'Success!', // Change title to 'Success!'
-      text: 'Logged in successfully', // Change text to indicate success
+      text: text, // Change text to indicate success
       icon: 'success', // Change icon to 'success'
       showConfirmButton: false, // Remove the confirm button
       timer: 1000 // Set the timer to 1 second (1000 milliseconds)
@@ -39,9 +39,9 @@ export class LoginComponent {
 
   login(): void {
     this.loginService.login(this.userlogin).subscribe(
-      (data: any) => {
+      (data: {message: string}) => {
          // Call showError method
-         this.showSuccess();
+         this.showSuccess(data.message);
         console.log(data); // Handle successful login response
       },
       (error: any) => {
